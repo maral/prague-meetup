@@ -7,6 +7,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { geoJsonToPolygonData, sortFunctionsMap } from "./data";
 import { GetStaticProps } from "next";
+import { getTips } from "@/data/tips";
 
 interface JsonMetadata {
   fileName: string;
@@ -44,8 +45,11 @@ export const getPraguePolygonStaticProps: GetStaticProps = () => {
     const fileContent = readFileSync(filePath, "utf8");
     const geoJsonData: GeoJSONData = JSON.parse(fileContent);
 
+    const tips = getTips();
+
     const polygonData = geoJsonToPolygonData(
       geoJsonData,
+      tips,
       metadata.propertiesMap,
       metadata.sortFunctionType
         ? sortFunctionsMap[metadata.sortFunctionType]

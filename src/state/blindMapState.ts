@@ -1,11 +1,8 @@
-import { debounce } from "debounce";
-
-export const LOCAL_STORAGE_KEY = "polygonState";
-
-enum GameState {
-  NOT_STARTED = "notStarted",
-  STARTED = "started",
-  FINISHED = "finished",
+export enum GameState {
+  NotStarted = "notStarted",
+  Started = "started",
+  Paused = "paused",
+  Finished = "finished",
 }
 
 export interface BlindMapState {
@@ -22,6 +19,7 @@ export enum BlindMapActionType {
   UPDATE_TIME = "updateTime",
   SELECT = "select",
   NEXT = "next",
+  RESTART = "restart",
 }
 
 export interface BlindMapAction {
@@ -29,7 +27,7 @@ export interface BlindMapAction {
   payload?: any;
 }
 
-const blindMapReducer = (
+export const blindMapReducer = (
   state: BlindMapState,
   action: BlindMapAction
 ): BlindMapState => {
@@ -37,8 +35,9 @@ const blindMapReducer = (
     case BlindMapActionType.START:
       return {
         ...state,
-        gameState: GameState.STARTED,
+        gameState: GameState.Started,
         time: 0,
+        toGuessList: action.payload,
         guesses: [],
         current: 0,
       };
@@ -46,7 +45,7 @@ const blindMapReducer = (
     case BlindMapActionType.FINISH:
       return {
         ...state,
-        gameState: GameState.FINISHED,
+        gameState: GameState.Finished,
       };
 
     case BlindMapActionType.UPDATE_TIME:
@@ -58,13 +57,21 @@ const blindMapReducer = (
     case BlindMapActionType.SELECT:
       return {
         ...state,
+        gameState: GameState.Paused,
         guesses: [...state.guesses, action.payload],
       };
 
     case BlindMapActionType.NEXT:
       return {
         ...state,
+        gameState: GameState.Started,
         current: state.current + 1,
+      };
+
+    case BlindMapActionType.RESTART:
+      return {
+        ...state,
+        gameState: GameState.NotStarted,
       };
 
     default:

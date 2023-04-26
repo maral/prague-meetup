@@ -51,7 +51,7 @@ export function Selector() {
                 className="group rounded-none border-0 bg-indigo-50 shadow-md shadow-indigo-500/50 transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50 md:rounded-lg"
               >
                 <div className="flex flex-col justify-between p-6">
-                  <p className="mb-1 text-lg font-semibold text-[#38ca8c]">
+                  <p className="mb-1 text-lg font-semibold text-green-500">
                     {option.type}
                   </p>
                   <p className="my-2 pb-6 font-primary text-4xl font-extrabold text-gray-800">

@@ -1,5 +1,6 @@
-import { GeoJSONData } from "@/components/Map";
+import { AreaTips } from "@/types/tips";
 import {
+  GeoJSONData,
   PolygonData,
   PolygonDataSortFunction,
   PolygonIdName,
@@ -11,6 +12,7 @@ import { LatLngExpression } from "leaflet";
 
 export function geoJsonToPolygonData(
   geoJsonData: GeoJSONData,
+  areaTips: AreaTips[],
   propertiesMap: PolygonPropertiesMap,
   sortFunction: PolygonDataSortFunction | null
 ): PolygonData[] {
@@ -29,9 +31,11 @@ export function geoJsonToPolygonData(
         return null;
       }
       const type = feature.geometry.type as PolygonType;
+      const tips = areaTips.find((at) => at.id === properties.id) ?? null;
       return {
         ...properties,
         type,
+        tips,
         coordinates:
           type === PolygonType.POLYGON
             ? convertPolygonCoordinates(feature.geometry as GeoJSON.Polygon)
@@ -70,7 +74,7 @@ function propertiesToIdName(
     return null;
   }
   return {
-    id: properties[propertiesMap.idKey],
+    id: properties[propertiesMap.idKey].toString(),
     name: replace(properties[propertiesMap.nameKey]),
   };
 }

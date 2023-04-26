@@ -84,7 +84,11 @@ const StatefulPolygon: React.FC<PolygonWithStateProps> = ({
       positions={polygon.coordinates}
       color="#555"
       weight={2}
-      eventHandlers={{ click: onClick, mouseover, mouseout }}
+      eventHandlers={{
+        ...(onClick ? { click: onClick } : {}),
+        mouseover,
+        mouseout,
+      }}
     >
       {showName && (
         <Tooltip

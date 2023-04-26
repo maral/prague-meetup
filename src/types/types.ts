@@ -1,5 +1,6 @@
 import { create } from "domain";
 import { LatLngExpression } from "leaflet";
+import { AreaTips } from "./tips";
 
 export type GeoJSONData = GeoJSON.FeatureCollection;
 
@@ -13,12 +14,16 @@ export interface PolygonIdName {
   name: string;
 }
 
-export interface SinglePolygonData extends PolygonIdName {
+export interface BasePolygon extends PolygonIdName {
+  tips: AreaTips;
+}
+
+export interface SinglePolygonData extends BasePolygon {
   coordinates: LatLngExpression[];
   type: PolygonType.POLYGON;
 }
 
-export interface MultiPolygonData extends PolygonIdName {
+export interface MultiPolygonData extends BasePolygon {
   coordinates: LatLngExpression[][];
   type: PolygonType.MULTIPOLYGON;
 }

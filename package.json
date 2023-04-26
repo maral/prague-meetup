@@ -6,33 +6,45 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "get-tips": "tsx src/bin/getTips.ts"
   },
   "dependencies": {
+    "@googleapis/sheets": "^4.0.2",
     "@react-leaflet/core": "^2.1.0",
     "@types/leaflet": "^1.9.3",
     "@types/node": "18.15.11",
     "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
+    "cheerio": "^1.0.0-rc.12",
     "debounce": "^1.2.1",
     "eslint": "8.37.0",
     "eslint-config-next": "13.3.0",
+    "google-spreadsheet": "^3.3.0",
     "leaflet": "^1.9.3",
+    "lodash": "^4.17.21",
     "next": "13.3.0",
+    "playwright": "^1.32.3",
+    "puppeteer": "^19.10.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "react": "18.2.0",
     "react-bootstrap-icons": "^1.10.3",
     "react-dom": "18.2.0",
-    "react-leaflet": "^4.2.1",
-    "typescript": "5.0.3"
+    "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
     "@types/debounce": "^1.2.1",
+    "@types/google-spreadsheet": "^3.3.1",
+    "@types/lodash": "^4.14.194",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.2.7",
     "tailwind-scrollbar": "^3.0.0",
-    "tailwindcss": "^3.3.1"
+    "tailwindcss": "^3.3.1",
+    "tsx": "^3.12.6",
+    "typescript": "^5.0.4"
   }
 }

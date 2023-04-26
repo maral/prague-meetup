@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { XLg } from "react-bootstrap-icons";
+
 interface PanelProps {
   title: string;
   children?: React.ReactNode;
@@ -10,8 +13,11 @@ export default function Panel({ title, children }: PanelProps) {
         <h1 className="relative font-lead text-xl font-extrabold tracking-wide lg:text-2xl">
           {title}
         </h1>
+        <Link href="/">
+          <XLg size={24} />
+        </Link>
       </div>
-      <div className="scrollbar-thumb-radius max-h-[calc(40vh-4rem)] w-full overflow-y-auto p-6 font-primary scrollbar-thin scrollbar-thumb-rose-100 lg:max-h-[calc(100vh-6rem)]">
+      <div className="scrollbar-thumb-radius h-[calc(40vh-4rem)] w-full overflow-y-auto p-6 font-primary scrollbar-thin scrollbar-thumb-rose-100 lg:h-[calc(100vh-6rem)]">
         {children}
       </div>
     </div>
