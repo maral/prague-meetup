@@ -35,6 +35,8 @@ function Tip({ tip, type }: TipProps) {
         className="max-h-40 w-full rounded-t-lg object-cover"
         src={tip.imageUrl}
         alt={`Fotka z místa "${tip.name}"`}
+        width={800}
+        height={600}
       />
       <div className="p-5">
         <p className="mb-1 text-lg font-semibold text-green-500">{type}</p>

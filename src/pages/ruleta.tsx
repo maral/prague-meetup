@@ -29,8 +29,8 @@ const limit = 40;
 
 export default function Roulette({ polygonData }: RouletteProps) {
   const [state, dispatch] = useReducer(rouletteReducer, {
-    gameState: RouletteGameState.NotStarted,
-    currentId: undefined,
+    gameState: RouletteGameState.Finished,
+    currentId: "28",
   });
 
   const polygonOptionsMap: PolygonOptionsMap = Object.fromEntries(
