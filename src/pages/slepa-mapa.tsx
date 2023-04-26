@@ -76,7 +76,7 @@ export default function BlindMap({ polygonData }: BlindMapProps) {
           (polygon) => polygon.id === state.toGuessList[state.current]
         )
       : undefined;
-  }, [state.gameState, state.toGuessList, state.current, polygonData]);
+  }, [state, polygonData]);
 
   const polygonOnClickFactory = (id: string) => () => {
     if (state.gameState === GameState.Started) {

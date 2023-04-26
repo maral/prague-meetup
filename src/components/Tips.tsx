@@ -2,6 +2,7 @@ import { AreaTips, Tip } from "@/types/tips";
 import { useState } from "react";
 import SmallButtonLink from "./ui/SmallButtonLink";
 import { BoxArrowUpRight } from "react-bootstrap-icons";
+import Image from "next/image";
 
 interface TipsProps {
   tips: AreaTips;
@@ -30,10 +31,10 @@ interface TipProps {
 function Tip({ tip, type }: TipProps) {
   return (
     <div className="rounded-lg border border-gray-200 bg-white font-primary shadow dark:border-gray-700 dark:bg-gray-800">
-      <img
+      <Image
         className="max-h-40 w-full rounded-t-lg object-cover"
         src={tip.imageUrl}
-        alt=""
+        alt={`Fotka z místa "${tip.name}"`}
       />
       <div className="p-5">
         <p className="mb-1 text-lg font-semibold text-green-500">{type}</p>
@@ -41,7 +42,9 @@ function Tip({ tip, type }: TipProps) {
           {tip.name}
         </h5>
         {tip.comment && (
-          <p className="mb-2 italic text-indigo-800">"{tip.comment}"</p>
+          <p className="mb-2 italic text-indigo-800">
+            &bdquo;{tip.comment}&ldquo;
+          </p>
         )}
         <LongText text={tip.description}></LongText>
         <SmallButtonLink href={tip.url}>

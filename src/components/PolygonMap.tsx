@@ -97,7 +97,7 @@ const CenterComponent = ({ polygonData }: CenterComponentProps) => {
         )
       );
     }
-  }, [polygonData]);
+  }, [polygonData, map]);
 
   return null;
 };
