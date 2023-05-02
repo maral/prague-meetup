@@ -1,13 +1,8 @@
 import Head from "next/head";
 import { GetStaticProps } from "next";
-import {
-  MapStyle,
-  PolygonColor,
-  PolygonData,
-  PolygonOptionsMap,
-} from "@/types/types";
+import { PolygonColor, PolygonData, PolygonOptionsMap } from "@/types/types";
 import { getPraguePolygonStaticProps } from "@/utils/loading";
-import MapLayout from "@/components/MapLayout";
+import MapLayout from "@/components/layout/MapLayout";
 import { useCallback, useReducer } from "react";
 import {
   RouletteActionType,
@@ -16,21 +11,23 @@ import {
 } from "@/state/rouletteState";
 import { PanelButton } from "@/components/ui/PanelButton";
 import sampleSize from "lodash/sampleSize";
-import PanelTitle from "@/components/ui/PanelTitle";
-import Tips from "@/components/Tips";
-import SmallButtonLink from "@/components/ui/SmallButtonLink";
-import { BoxArrowUpRight } from "react-bootstrap-icons";
+import PanelH2 from "@/components/ui/PanelH2";
+import Tips from "@/components/common/Tips";
+import { MapStyle } from "@/utils/mapConstants";
 
 interface RouletteProps {
   polygonData: PolygonData[];
 }
 
 const limit = 40;
+const forceCustomId = undefined;
 
 export default function Roulette({ polygonData }: RouletteProps) {
   const [state, dispatch] = useReducer(rouletteReducer, {
-    gameState: RouletteGameState.Finished,
-    currentId: "28",
+    gameState: forceCustomId
+      ? RouletteGameState.Finished
+      : RouletteGameState.NotStarted,
+    currentId: forceCustomId,
   });
 
   const polygonOptionsMap: PolygonOptionsMap = Object.fromEntries(
@@ -44,7 +41,7 @@ export default function Roulette({ polygonData }: RouletteProps) {
           state.currentId === polygon.id
             ? state.gameState === RouletteGameState.Started
               ? PolygonColor.Wrong
-              : PolygonColor.Correct
+              : PolygonColor.Focused
             : PolygonColor.Neutral,
       },
     ])
@@ -84,11 +81,22 @@ export default function Roulette({ polygonData }: RouletteProps) {
         polygonOptionsMap={polygonOptionsMap}
         mapStyle={MapStyle.Normal}
         showPanel={true}
+        panelExpanded={state.gameState === RouletteGameState.Finished}
         panelTitle="Ruleta"
+        focus={
+          state.gameState === RouletteGameState.Finished && currentPolygon
+            ? currentPolygon.id
+            : "all"
+        }
+        tips={
+          state.gameState === RouletteGameState.Finished && currentPolygon
+            ? currentPolygon.tips
+            : undefined
+        }
       >
         {state.gameState === RouletteGameState.NotStarted && (
           <>
-            <PanelTitle>Vítejte u naší rulety!</PanelTitle>
+            <PanelH2>Vítej u naší rulety!</PanelH2>
             <PanelButton
               onClick={roll}
               title="Spustit ruletu"
@@ -98,16 +106,11 @@ export default function Roulette({ polygonData }: RouletteProps) {
         )}
 
         {state.gameState === RouletteGameState.Started && (
-          <PanelTitle>{currentPolygon?.name}</PanelTitle>
+          <PanelH2>{currentPolygon?.name}</PanelH2>
         )}
 
         {state.gameState === RouletteGameState.Finished && currentPolygon && (
           <>
-            <PanelTitle>Bingo, {currentPolygon.name}!</PanelTitle>
-            <SmallButtonLink href={currentPolygon.tips.url}>
-              {currentPolygon.name} na Mapy.cz{" "}
-              <BoxArrowUpRight size={12} className="relative top-[-1px] ml-2" />
-            </SmallButtonLink>
             <Tips tips={currentPolygon.tips}></Tips>
             <PanelButton
               onClick={() => dispatch({ type: RouletteActionType.RESTART })}

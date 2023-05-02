@@ -1,39 +1,49 @@
-import { debounce } from "debounce";
+import { TipReason } from "@/types/tips";
+import debounce from "lodash/debounce";
+import intersection from "lodash/intersection";
+import sample from "lodash/sample";
 
 export const LOCAL_STORAGE_KEY = "polygonState";
 
-export const idsArrayToState = (
-  ids: string[],
-  valueFunction: (id: string) => boolean
-): PolygonState => {
-  return ids.reduce((accumulator: PolygonState, id) => {
-    accumulator[id] = valueFunction(id);
-    return accumulator;
-  }, {});
-};
+export enum CoopGameState {
+  Started = "started",
+  Finished = "finished",
+  SelectingMunicipality = "selectingMunicipality",
+  ShowTips = "showTips",
+}
 
-export interface PolygonState {
+export interface CoopState {
+  gameState: CoopGameState;
+  selection: CoopSelection;
+  reason?: TipReason;
+  tipId?: string;
+}
+
+export interface CoopSelection {
   [id: string]: boolean;
 }
 
-export enum PolygonActionType {
+export enum CoopActionType {
   TOGGLE = "toggle",
   INITIALIZE = "initialize",
   SELECT_ALL = "selectAll",
   UNSELECT_ALL = "unselectAll",
+  FINISH = "finish",
+  MANUALLY_SELECT = "manually-select",
+  RANDOMLY_SELECT = "randomly-select",
+  SELECT_MUNICIPALITY = "select-municipality",
+  RESTART_CLEAN = "restart-clean",
+  RESTART_PREVIOUS = "restart-previous",
 }
 
-export interface PolygonAction {
-  type: PolygonActionType;
-  payload: { ids: string[] };
+export interface CoopAction {
+  type: CoopActionType;
+  payload?: any;
 }
 
-type PolygonReducer = (
-  state: PolygonState,
-  action: PolygonAction
-) => PolygonState;
+type PolygonReducer = (state: CoopState, action: CoopAction) => CoopState;
 
-export const getStoredState = (): PolygonState | null => {
+export const getStoredState = (): CoopState | null => {
   const storedState = localStorage.getItem(LOCAL_STORAGE_KEY);
 
   if (storedState) {
@@ -43,14 +53,14 @@ export const getStoredState = (): PolygonState | null => {
   return null;
 };
 
-const debouncedSaveToLocalStorage = debounce((state: PolygonState) => {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
+const debouncedSaveToLocalStorage = debounce((state: CoopState) => {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state.selection));
 }, 1000);
 
 const saveTolocalStorage = (reducer: PolygonReducer): PolygonReducer => {
   return (state, action) => {
     const newState = reducer(state, action);
-    if (action.type !== PolygonActionType.INITIALIZE) {
+    if (action.type !== CoopActionType.INITIALIZE) {
       debouncedSaveToLocalStorage(newState);
     }
     return newState;
@@ -58,27 +68,115 @@ const saveTolocalStorage = (reducer: PolygonReducer): PolygonReducer => {
 };
 
 export const municipalityPolygonReducer = saveTolocalStorage(
-  (state: PolygonState, action: PolygonAction): PolygonState => {
+  (state: CoopState, action: CoopAction): CoopState => {
     switch (action.type) {
-      case PolygonActionType.UNSELECT_ALL: {
+      case CoopActionType.UNSELECT_ALL: {
         return {
           ...state,
-          ...idsArrayToState(action.payload.ids, (id) => false),
+          selection: {
+            ...state.selection,
+            ...idsArrayToSelection(action.payload.ids, (id) => false),
+          },
         };
       }
-      case PolygonActionType.INITIALIZE:
-      case PolygonActionType.SELECT_ALL: {
+      case CoopActionType.INITIALIZE:
+      case CoopActionType.SELECT_ALL: {
         return {
           ...state,
-          ...idsArrayToState(action.payload.ids, (id) => true),
+          selection: {
+            ...state.selection,
+            ...idsArrayToSelection(action.payload.ids, (id) => true),
+          },
         };
       }
-      case PolygonActionType.TOGGLE: {
+      case CoopActionType.FINISH: {
+        const unchecked = getUnchecked(state.selection);
+        if (unchecked.length > 1) {
+          return {
+            ...state,
+            gameState: CoopGameState.Finished,
+          };
+        } else if (unchecked.length === 1) {
+          return {
+            ...state,
+            gameState: CoopGameState.ShowTips,
+            reason: TipReason.OnlyOption,
+            tipId: unchecked[0],
+          };
+        } else {
+          return { ...state };
+        }
+      }
+      case CoopActionType.TOGGLE: {
         return {
           ...state,
-          ...idsArrayToState(action.payload.ids, (id) => !state[id]),
+          selection: {
+            ...state.selection,
+            ...idsArrayToSelection(
+              action.payload.ids,
+              (id) => !state.selection[id]
+            ),
+          },
+        };
+      }
+      case CoopActionType.MANUALLY_SELECT: {
+        return {
+          ...state,
+          gameState: CoopGameState.SelectingMunicipality,
+        };
+      }
+
+      case CoopActionType.SELECT_MUNICIPALITY: {
+        return {
+          ...state,
+          gameState: CoopGameState.ShowTips,
+          reason: TipReason.UserSelected,
+          tipId: action.payload,
+        };
+      }
+
+      case CoopActionType.RANDOMLY_SELECT: {
+        return {
+          ...state,
+          gameState: CoopGameState.ShowTips,
+          reason: TipReason.RandomlySelected,
+          tipId: sample(getUnchecked(state.selection)),
+        };
+      }
+
+      case CoopActionType.RESTART_CLEAN:
+      case CoopActionType.RESTART_PREVIOUS: {
+        return {
+          ...state,
+          gameState: CoopGameState.Started,
+          selection:
+            action.type === CoopActionType.RESTART_PREVIOUS
+              ? state.selection
+              : idsArrayToSelection(Object.keys(state.selection), () => {
+                  return false;
+                }),
+          tipId: undefined,
+          reason: undefined,
         };
       }
     }
   }
 );
+
+export const getUnchecked = (selection: CoopSelection): string[] => {
+  return Object.keys(selection).filter((id) => !selection[id]);
+};
+
+export const getUncheckedCount = (selection: CoopSelection): number => {
+  return getUnchecked(selection).length;
+};
+
+export const idsArrayToSelection = (
+  ids: string[],
+  valueFunction: (id: string) => boolean
+): CoopSelection => {
+  return ids.reduce((accumulator: CoopSelection, id) => {
+    accumulator[id] = valueFunction(id);
+    return accumulator;
+  }, {});
+};

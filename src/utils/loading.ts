@@ -17,7 +17,7 @@ interface JsonMetadata {
 
 const getPragueDistricts = (): JsonMetadata => {
   return {
-    fileName: "prague-polygons.geojson",
+    fileName: "prague-polygons-lean.geojson",
     propertiesMap: {
       idKey: "OBJECTID",
       nameKey: "NAZEV_1",
@@ -41,7 +41,7 @@ export const getPraguePolygonStaticProps: GetStaticProps = () => {
   try {
     const metadata = getPragueDistricts();
 
-    const filePath = join(process.cwd(), "public", metadata.fileName);
+    const filePath = join(process.cwd(), "data", metadata.fileName);
     const fileContent = readFileSync(filePath, "utf8");
     const geoJsonData: GeoJSONData = JSON.parse(fileContent);
 

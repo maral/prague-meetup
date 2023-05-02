@@ -15,7 +15,7 @@ export interface AreaTipsSource {
 
 export interface Coordinates {
   lat: number;
-  lon: number;
+  lng: number;
 }
 
 export interface ScrapedData {
@@ -41,3 +41,9 @@ export interface AreaTips {
 }
 
 export type TipType = "culture" | "nature" | "food";
+
+export enum TipReason {
+  OnlyOption,
+  UserSelected,
+  RandomlySelected,
+}

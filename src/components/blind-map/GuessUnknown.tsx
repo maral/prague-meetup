@@ -7,7 +7,7 @@ export default function GuessUnknown() {
         <Question size={18} color="white" />
       </span>
 
-      <span className="inline-block h-4 w-20 border-b-2 border-dashed border-gray-500"></span>
+      <span className="inline-block h-5 w-32 border-b-2 border-dashed border-gray-400"></span>
     </li>
   );
 }

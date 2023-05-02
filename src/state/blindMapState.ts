@@ -1,24 +1,34 @@
+import { TipReason } from "@/types/tips";
+import { countCorrect, getIncorrect } from "@/utils/data";
+import sample from "lodash/sample";
+
 export enum GameState {
   NotStarted = "notStarted",
   Started = "started",
   Paused = "paused",
-  Finished = "finished",
+  AllCorrect = "allCorrect",
+  ChoosingMode = "choosingMode",
+  SelectingMunicipality = "selectingMunicipality",
+  ShowTips = "showTips",
 }
 
 export interface BlindMapState {
   toGuessList: string[];
   gameState: GameState;
-  time: number;
   guesses: string[];
   current: number;
+  reason?: TipReason;
+  tipId?: string;
 }
 
 export enum BlindMapActionType {
   START = "start",
-  FINISH = "finish",
-  UPDATE_TIME = "updateTime",
   SELECT = "select",
   NEXT = "next",
+  FINISH = "finish",
+  MANUALLY_SELECT = "manually-select",
+  RANDOMLY_SELECT = "randomly-select",
+  SELECT_MUNICIPALITY = "select-municipality",
   RESTART = "restart",
 }
 
@@ -36,22 +46,9 @@ export const blindMapReducer = (
       return {
         ...state,
         gameState: GameState.Started,
-        time: 0,
         toGuessList: action.payload,
         guesses: [],
         current: 0,
-      };
-
-    case BlindMapActionType.FINISH:
-      return {
-        ...state,
-        gameState: GameState.Finished,
-      };
-
-    case BlindMapActionType.UPDATE_TIME:
-      return {
-        ...state,
-        time: action.payload,
       };
 
     case BlindMapActionType.SELECT:
@@ -73,6 +70,52 @@ export const blindMapReducer = (
         ...state,
         gameState: GameState.NotStarted,
       };
+
+    case BlindMapActionType.FINISH: {
+      const correct = countCorrect(state.toGuessList, state.guesses);
+
+      if (state.toGuessList.length - correct === 1) {
+        return {
+          ...state,
+          gameState: GameState.ShowTips,
+          reason: TipReason.OnlyOption,
+          tipId: getIncorrect(state.toGuessList, state.guesses)[0],
+        };
+      } else {
+        return {
+          ...state,
+          gameState:
+            correct === state.toGuessList.length
+              ? GameState.AllCorrect
+              : GameState.ChoosingMode,
+        };
+      }
+    }
+
+    case BlindMapActionType.MANUALLY_SELECT: {
+      return {
+        ...state,
+        gameState: GameState.SelectingMunicipality,
+      };
+    }
+
+    case BlindMapActionType.SELECT_MUNICIPALITY: {
+      return {
+        ...state,
+        gameState: GameState.ShowTips,
+        reason: TipReason.UserSelected,
+        tipId: action.payload,
+      };
+    }
+
+    case BlindMapActionType.RANDOMLY_SELECT: {
+      return {
+        ...state,
+        gameState: GameState.ShowTips,
+        reason: TipReason.RandomlySelected,
+        tipId: sample(getIncorrect(state.toGuessList, state.guesses)),
+      };
+    }
 
     default:
       return state;

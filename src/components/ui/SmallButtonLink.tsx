@@ -1,6 +1,6 @@
-import { UIProps } from "@/types/ui";
+import { UiProps } from "@/types/ui";
 
-interface SmallButtonProps extends UIProps {
+interface SmallButtonProps extends UiProps {
   href: string;
   children: React.ReactNode;
 }
@@ -14,7 +14,7 @@ export default function SmallButtonLink({
     <a
       href={href}
       target="_blank"
-      className={`inline-flex items-center rounded-lg bg-indigo-700 px-3 py-2 text-center text-sm text-white transition-all focus:outline-none focus:ring-4 focus:ring-indigo-300 hover:bg-indigo-800 ${
+      className={`inline-flex items-center rounded-lg border-2 border-indigo-700 bg-indigo-100 px-2.5 py-1.5 text-center text-sm text-indigo-700 transition-all focus:outline-none focus:ring-4 focus:ring-indigo-300 hover:bg-indigo-200 ${
         className ?? ""
       }`}
     >

@@ -16,6 +16,9 @@ module.exports = {
         secondary: ["var(--secondary-font)", ...fontFamily.serif],
         lead: ["var(--lead-font)", ...fontFamily.serif],
       },
+      colors: {
+        "green-550": "#2bb65e",
+      },
     },
   },
   plugins: [require("tailwind-scrollbar"), require("@tailwindcss/forms")],

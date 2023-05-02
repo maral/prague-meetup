@@ -38,7 +38,9 @@ export const isMultiPolygonData = (
   value: PolygonData
 ): value is MultiPolygonData => value.type === PolygonType.MULTIPOLYGON;
 
-export type PolygonDataSortFunction = (data: PolygonData[]) => PolygonData[];
+export type PolygonDataSortFunction = <Type extends PolygonIdName>(
+  data: Type[]
+) => Type[];
 
 export interface PolygonPropertiesMap {
   idKey: string;
@@ -55,6 +57,7 @@ export const enum PolygonColor {
   On,
   Correct,
   Wrong,
+  Focused,
 }
 
 export interface PolygonOptionsMap {
@@ -64,17 +67,4 @@ export interface PolygonOptionsMap {
   };
 }
 
-export enum MapStyle {
-  Normal = "normal",
-  Blind = "empty",
-}
-
-const accessToken =
-  "pk.eyJ1IjoibWFyZWtsaXN5IiwiYSI6ImNsZzhicW81ejB3N3AzaXBkaHN3ZmlxNGMifQ.2coMyxXBY8l3wt5i4dNb8A";
-const user = "mareklisy";
-const createMapBoxUrl = (styleId: string) =>
-  `https://api.mapbox.com/styles/v1/${user}/${styleId}/tiles/256/{z}/{x}/{y}@2x?access_token=${accessToken}`;
-export const mapboxTilesUrls = {
-  [MapStyle.Normal]: createMapBoxUrl("clg8bw6d6002k01mgboi4vz0w"),
-  [MapStyle.Blind]: createMapBoxUrl("clgb26rpx003701n2fdjr0yb9"),
-};
+export type PolygonNameMap = { [k: string]: string };

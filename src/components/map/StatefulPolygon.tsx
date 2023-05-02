@@ -1,7 +1,7 @@
 import { PolygonColor, PolygonData } from "@/types/types";
 import { LeafletMouseEventHandlerFn, PathOptions, Polygon } from "leaflet";
-import { useRef, useEffect } from "react";
-import { Polygon as ReactPolygon, Tooltip, useMapEvents } from "react-leaflet";
+import { useRef, useEffect, useState } from "react";
+import { Polygon as ReactPolygon, Tooltip } from "react-leaflet";
 import styles from "@/styles/StatefulPolygon.module.css";
 import { Mukta } from "next/font/google";
 
@@ -14,47 +14,74 @@ interface PolygonWithStateProps {
   onClick?: LeafletMouseEventHandlerFn;
 }
 
+const colors = {
+  indigo: "#4338ca",
+  lightRed: "#de3012",
+  green: "#00ff00",
+  red: "#ff0000",
+  darkGray: "#555",
+};
+
 const colorStyles: { [key in PolygonColor]: [PathOptions, PathOptions] } = {
   [PolygonColor.Neutral]: [
     {
-      fillColor: "blue",
+      fillColor: colors.indigo,
       fillOpacity: 0.1,
     },
     {
-      fillColor: "blue",
+      fillColor: colors.indigo,
       fillOpacity: 0.15,
+    },
+  ],
+  [PolygonColor.Focused]: [
+    {
+      fillColor: colors.indigo,
+      color: colors.indigo,
+      fillOpacity: 0,
+      weight: 4,
+    },
+    {
+      fillColor: colors.indigo,
+      color: colors.indigo,
+      fillOpacity: 0,
+      weight: 4,
     },
   ],
   [PolygonColor.On]: [
     {
-      fillColor: "#de3012",
+      fillColor: colors.lightRed,
       fillOpacity: 0.3,
     },
     {
-      fillColor: "#de3012",
+      fillColor: colors.lightRed,
       fillOpacity: 0.38,
     },
   ],
   [PolygonColor.Correct]: [
     {
-      fillColor: "#00ff00",
+      fillColor: colors.green,
       fillOpacity: 0.3,
     },
     {
-      fillColor: "#00ff00",
+      fillColor: colors.green,
       fillOpacity: 0.5,
     },
   ],
   [PolygonColor.Wrong]: [
     {
-      fillColor: "#ff0000",
+      fillColor: colors.red,
       fillOpacity: 0.3,
     },
     {
-      fillColor: "#ff0000",
+      fillColor: colors.red,
       fillOpacity: 0.5,
     },
   ],
+};
+
+const defaultStyle: PathOptions = {
+  color: colors.darkGray,
+  weight: 2,
 };
 
 const StatefulPolygon: React.FC<PolygonWithStateProps> = ({
@@ -64,17 +91,30 @@ const StatefulPolygon: React.FC<PolygonWithStateProps> = ({
   onClick,
 }) => {
   const polygonRef = useRef<Polygon | null>(null);
+  const [hover, setHover] = useState(false);
 
   useEffect(() => {
-    polygonRef.current?.setStyle(colorStyles[color][0]);
-  }, [color, polygonRef]);
+    if (polygonRef.current) {
+      const currentStyle = colorStyles[color][hover ? 1 : 0];
+      polygonRef.current.setStyle(currentStyle);
+      for (const key in defaultStyle) {
+        if (!(key in currentStyle)) {
+          // @ts-ignore
+          polygonRef.current.setStyle({ [key]: defaultStyle[key] });
+        }
+      }
+      if (color === PolygonColor.Focused) {
+        polygonRef.current?.bringToFront();
+      }
+    }
+  }, [color, polygonRef, hover]);
 
   const mouseover = () => {
-    polygonRef.current?.setStyle(colorStyles[color][1]);
+    setHover(true);
   };
 
   const mouseout = () => {
-    polygonRef.current?.setStyle(colorStyles[color][0]);
+    setHover(false);
   };
 
   return (

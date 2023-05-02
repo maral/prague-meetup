@@ -10,8 +10,8 @@ async function scrapePage(url: string): Promise<ScrapedData> {
   await page.goto(url, { waitUntil: "networkidle" });
 
   const content = await page.content();
-  const filename = cutStringSinceLastSlash(url);
-  writeFileSync(`data/${filename}.html`, content);
+  // const filename = cutStringSinceLastSlash(url);
+  // writeFileSync(`data/${filename}.html`, content);
   const $ = cheerio.load(content);
 
   const title = $("div.content-title h1").text().trim();
@@ -24,7 +24,7 @@ async function scrapePage(url: string): Promise<ScrapedData> {
   return {
     name: title,
     description,
-    imageUrl: removeQueryString(imageURL) + "?fl=res,800,600,1",
+    imageUrl: sanitizeImageUrl(imageURL),
     gps: parseCoordinates(gps),
     url,
   };
@@ -44,16 +44,25 @@ export async function scrapeLinks(links: string[]): Promise<ScrapedData[]> {
 
 const parseCoordinates = (gps: string): Coordinates => {
   const [lat, lon] = gps.split(",").map((coord) => parseFloat(coord));
-  const latDir = gps.slice(-1) === "N" ? 1 : -1;
+  const latDir = gps.split(",")[0].trim().slice(-1) === "N" ? 1 : -1;
   const lonDir = gps.slice(-1) === "E" ? 1 : -1;
 
   return {
     lat: latDir * lat,
-    lon: lonDir * lon,
+    lng: lonDir * lon,
   };
 };
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const sanitizeImageUrl = (url: string): string => {
+  if (url.substring(0, 2) === "//") {
+    url = `https:${url}`;
+  } else if (url[0] === "/") {
+    url = `https://mapy.cz${url}`;
+  }
+  return removeQueryString(url) + "?fl=res,800,600,1";
+};
 
 const cutStringSinceLastSlash = (input: string): string => {
   const lastSlashIndex = input.lastIndexOf("/");

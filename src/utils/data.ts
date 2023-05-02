@@ -1,4 +1,4 @@
-import { AreaTips } from "@/types/tips";
+import { AreaTips, Tip } from "@/types/tips";
 import {
   GeoJSONData,
   PolygonData,
@@ -87,7 +87,9 @@ function replace(name: string) {
 }
 
 const pragueNumberPattern = /^Praha (\d+)$/;
-export const sortPragueDistricts = (data: PolygonData[]): PolygonData[] => {
+export const sortPragueDistricts = <Type extends PolygonIdName>(
+  data: Type[]
+): Type[] => {
   return data.sort((a, b) => {
     const aPrague = pragueNumberPattern.test(a.name);
     const bPrague = pragueNumberPattern.test(b.name);
@@ -107,4 +109,26 @@ export const sortFunctionsMap: {
   [SortFunctionType.PRAGUE_DISTRICTS.toString()]: sortPragueDistricts,
   [SortFunctionType.NAME_SORT.toString()]: (data) =>
     data.sort((a, b) => a.name.localeCompare(b.name)),
+};
+
+export const countCorrect = (
+  toGuessList: string[],
+  guesses: string[]
+): number =>
+  guesses.reduce(
+    (prev, current, index) => prev + (current === toGuessList[index] ? 1 : 0),
+    0
+  );
+
+export const getIncorrect = (
+  toGuessList: string[],
+  guesses: string[]
+): string[] => toGuessList.filter((id, index) => id !== guesses[index]);
+
+export const tipsToArray = (tips: AreaTips): Tip[] => {
+  const tipsArray: Tip[] = [];
+  if (tips.culture) tipsArray.push(tips.culture);
+  if (tips.nature) tipsArray.push(tips.nature);
+  if (tips.food) tipsArray.push(tips.food);
+  return tipsArray;
 };

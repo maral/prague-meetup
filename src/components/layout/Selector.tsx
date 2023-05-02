@@ -14,32 +14,34 @@ export function Selector() {
       type: "Spolupráce",
       title: "Výběr s přáteli",
       description:
-        "Vyber všechny MČ, kde jsi už byl. Pošli výsledek kamarádovi. Po jeho vyplnění dostanete návrh, kam zajít.",
+        "Vyber všechny městské části, které už znáš. Pošli výsledek kamárádovi. Po vyplnění dostanete návrhy na místa, kam můžete společně zajít.",
     },
     {
       path: "/slepa-mapa",
-      type: "Testík",
+      type: "Kvíz",
       title: "Slepá mapa",
       description:
-        "Poznej co nejvíc městských částí na slepé mapě. Z těch, které neuhodneš, dostaneš jednu za úkol navštívit.",
+        "Poznej co nejvíce městských části na slepé mapě. Z těch, které neuhodneš, ti jednu vybereme. Tu budeš mít za úkol navštívit.",
     },
     {
       path: "/ruleta",
-      type: "Překvápko",
+      type: "Náhoda",
       title: "Ruleta",
-      description: "Vyberte mi, jakou městskou část mám navštívit. ",
+      description:
+        "Chceš poznávat, ale nerad se rozhoduješ? Zatoč si ruletou, ktrerá to rozsekne za tebe.",
     },
   ];
 
   return (
-    <section className="mx-auto flex min-h-screen max-w-7xl px-4">
+    <section className="mx-auto flex min-h-screen max-w-7xl px-8 font-primary">
       <div className="m-auto">
         <div className="mx-auto w-full text-left md:w-11/12 md:text-center xl:w-9/12">
           <h1 className="mb-5 mt-5 block pb-2 font-lead text-4xl font-extrabold text-indigo-700 md:text-6xl">
             Objev novou část Prahy
           </h1>
           <p className="mb-10 px-0 text-lg text-gray-500 lg:mb-20 lg:px-24 lg:text-xl">
-            Praha má 57 městských částí. Vyber si, jak je chceš objevovat.
+            Praha má 57 městských částí. Nech se zavést tam, kam tě nohy ani
+            mapy zatím nedovedly. Vyber si, jak je budeš objevovat.
           </p>
         </div>
         <div className="mx-auto mb-10 w-full xl:w-4/5">
@@ -51,7 +53,7 @@ export function Selector() {
                 className="group rounded-none border-0 bg-indigo-50 shadow-md shadow-indigo-500/50 transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50 md:rounded-lg"
               >
                 <div className="flex flex-col justify-between p-6">
-                  <p className="mb-1 text-lg font-semibold text-green-500">
+                  <p className="mb-1 text-lg font-semibold text-green-550">
                     {option.type}
                   </p>
                   <p className="my-2 pb-6 font-primary text-4xl font-extrabold text-gray-800">

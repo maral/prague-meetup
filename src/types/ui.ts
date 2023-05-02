@@ -1,3 +1,3 @@
-export interface UIProps {
+export interface UiProps {
   className?: string;
 }

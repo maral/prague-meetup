@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { useState } from "react";
 import { XLg } from "react-bootstrap-icons";
 
 interface PanelProps {
   title: string;
   children?: React.ReactNode;
+  expanded: boolean;
 }
 
 export default function Panel({ title, children }: PanelProps) {
@@ -13,11 +15,14 @@ export default function Panel({ title, children }: PanelProps) {
         <h1 className="relative font-lead text-xl font-extrabold tracking-wide lg:text-2xl">
           {title}
         </h1>
-        <Link href="/">
+        <Link href="/" className="transition-all hover:scale-125">
           <XLg size={24} />
         </Link>
       </div>
-      <div className="scrollbar-thumb-radius h-[calc(40vh-4rem)] w-full overflow-y-auto p-6 font-primary scrollbar-thin scrollbar-thumb-rose-100 lg:h-[calc(100vh-6rem)]">
+      <div
+        className="scrollbar-thumb-radius h-[calc(100%-4rem)] w-full overflow-y-auto py-6 pl-6 pr-[calc(1.5rem-8px)] font-primary scrollbar-thin scrollbar-thumb-indigo-200 lg:h-[calc(100vh-6rem)]"
+        style={{ scrollbarGutter: "stable" }}
+      >
         {children}
       </div>
     </div>
