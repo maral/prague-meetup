@@ -43,11 +43,11 @@ export interface CoopAction {
 
 type PolygonReducer = (state: CoopState, action: CoopAction) => CoopState;
 
-export const getStoredState = (): CoopState | null => {
-  const storedState = localStorage.getItem(LOCAL_STORAGE_KEY);
+export const getStoredState = (): CoopSelection | null => {
+  const storedSelection = localStorage.getItem(LOCAL_STORAGE_KEY);
 
-  if (storedState) {
-    return JSON.parse(storedState);
+  if (storedSelection) {
+    return JSON.parse(storedSelection);
   }
 
   return null;

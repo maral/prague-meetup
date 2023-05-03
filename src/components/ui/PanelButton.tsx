@@ -6,6 +6,7 @@ interface PanelButtonProps {
   className?: string;
   onClick?: () => void;
   href?: string;
+  disabled?: boolean;
 }
 
 export function PanelButton({
@@ -14,9 +15,12 @@ export function PanelButton({
   className,
   onClick,
   href,
+  disabled = false,
 }: PanelButtonProps) {
-  const composedClassName = `block tracking-wider text-center rounded-lg bg-indigo-700 p-4 text-indigo-100
-  shadow-md shadow-indigo-400/50 transition-all hover:bg-indigo-500 hover:text-indigo-50 ${
+  const composedClassName = `block tracking-wider text-center rounded-lg p-4 text-indigo-100
+  shadow-md shadow-indigo-400/50 transition-all
+  ${disabled ? "bg-indigo-400 cursor-not-allowed" : "bg-indigo-700 hover:bg-indigo-500 hover:text-indigo-50"}
+  ${
     className ? className : ""
   }`;
 
@@ -27,7 +31,11 @@ export function PanelButton({
     </>
   );
 
-  return onClick ? (
+  return disabled ? (
+    <button className={composedClassName} disabled={disabled}>
+      {content}
+    </button>
+  ) : onClick ? (
     <button className={composedClassName} onClick={onClick}>
       {content}
     </button>

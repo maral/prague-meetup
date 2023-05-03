@@ -14,7 +14,7 @@ export function Selector() {
       type: "Spolupráce",
       title: "Výběr s přáteli",
       description:
-        "Vyber všechny městské části, které už znáš. Pošli výsledek kamárádovi. Po vyplnění dostanete návrhy na místa, kam můžete společně zajít.",
+        "Vyber všechny městské části, které už znáš. Pošli výsledek kamárádovi. Po vyplnění dostanete návrhy na nová zajímavá místa, kam můžete společně zajít.",
     },
     {
       path: "/slepa-mapa",

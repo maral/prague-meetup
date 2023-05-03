@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import Panel from "@/components/layout/Panel";
 import { PolygonData, PolygonOptionsMap } from "@/types/types";
 import { LeafletMouseEventHandlerFn } from "leaflet";
-import { useState } from "react";
+import { RefObject, useState } from "react";
 import { MapStyle } from "@/utils/mapConstants";
 import { AreaTips } from "@/types/tips";
 
@@ -14,6 +14,7 @@ interface MapLayoutProps {
   showPanel: boolean;
   panelExpanded: boolean;
   panelTitle: string;
+  panelRef?: RefObject<HTMLDivElement>;
   tips?: AreaTips;
   focus?: string;
   children?: React.ReactNode;
@@ -31,6 +32,7 @@ export default function MapLayout({
   showPanel,
   panelExpanded,
   panelTitle,
+  panelRef,
   tips,
   focus,
   children,
@@ -65,7 +67,7 @@ export default function MapLayout({
         <div
           className={`relative z-1000 ${panelHeight} w-full shadow-info-box transition-all lg:h-full ${panelWidth}`}
         >
-          <Panel title={panelTitle} expanded={true}>
+          <Panel title={panelTitle} expanded={true} divRef={panelRef}>
             {children}
           </Panel>
         </div>

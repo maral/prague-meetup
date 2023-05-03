@@ -11,16 +11,16 @@ interface PanelProps {
 }
 
 export default function CoopPanel({ state, data, dispatch }: PanelProps) {
-  const checked = Object.values(state.selection).filter(
-    (value) => value
+  const unchecked = Object.values(state.selection).filter(
+    (value) => !value
   ).length;
   const allIds = useMemo(() => data.map((polygon) => polygon.id), [data]);
-  const allSelected = checked - data.length === 0;
+  const allSelected = unchecked === 0;
 
   return (
     <>
       <div>
-        Vybráno: {checked} / {data.length}
+        Zbývá: {unchecked} / {data.length}
       </div>
       <ul className="mt-4 grid grid-cols-2 md:grid-cols-1">
         <li key={0} className="col-span-2 md:col-span-1">
