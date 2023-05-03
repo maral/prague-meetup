@@ -44,7 +44,7 @@ export const getPraguePolygonStaticProps: GetStaticProps = () => {
     const filePath = join(process.cwd(), "data", metadata.fileName);
     const fileContent = readFileSync(filePath, "utf8");
     const geoJsonData: GeoJSONData = JSON.parse(fileContent);
-    const siteUrl = process.env.SITE_URL;
+    const siteUrl = process.env.SITE_URL || null;
 
     const tips = getTips();
 

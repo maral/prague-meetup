@@ -28,7 +28,7 @@ export function Selector() {
       type: "Náhoda",
       title: "Ruleta",
       description:
-        "Chceš poznávat, ale nerad se rozhoduješ? Zatoč si ruletou, ktrerá to rozsekne za tebe.",
+        "Chceš objevovat Prahu, ale nerad se rozhoduješ? Zatoč si ruletou, ktrerá to rozsekne za tebe.",
     },
   ];
 

@@ -1,9 +1,9 @@
 import "@/styles/globals.css";
 import "leaflet/dist/leaflet.css";
 import type { AppProps } from "next/app";
-import { Mukta, Righteous, Urbanist, Varela } from "next/font/google";
+import { Mukta, Nunito, Righteous, Urbanist, Varela } from "next/font/google";
 import Head from "next/head";
-const main = Mukta({ weight: "400", subsets: ["latin"] });
+const main = Nunito({ weight: "400", subsets: ["latin"] });
 const secondary = Varela({ weight: "400", subsets: ["latin"] });
 const lead = Urbanist({ weight: "800", subsets: ["latin"] });
 

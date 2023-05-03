@@ -58,7 +58,7 @@ export default function BlindMap({ polygonData, siteUrl }: BlindMapProps) {
         dispatch({ type: CoopActionType.INITIALIZE, payload: { ids } });
       }
     }
-  }, [router.isReady]);
+  }, [router, router.isReady, polygonData]);
 
   useEffect(() => {
     if (panelRef.current) {
