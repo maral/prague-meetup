@@ -80,14 +80,7 @@ export default function Tips({ tips }: TipsProps) {
     <>
       <PanelH1>{title}</PanelH1>
       {tips.description && (
-        <SlideDown
-          hideText="Skrýt informace o městské části"
-          showText="Zobrazit informace o městské části"
-          className="mb-4"
-          initialShow={true}
-        >
-          <p>{tips.description}</p>
-        </SlideDown>
+        <p className="mb-4">{tips.description}</p>
       )}
       <SmallButtonLink href={tips.url} className="mb-12">
         {tips.name} k prozkoumání na Mapy.cz{" "}

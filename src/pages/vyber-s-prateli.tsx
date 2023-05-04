@@ -104,7 +104,7 @@ export default function BlindMap({ polygonData, siteUrl }: BlindMapProps) {
         onClickFactory={(id) => () =>
           dispatch({ type: CoopActionType.TOGGLE, payload: { ids: [id] } })}
         showPanel={true}
-        panelExpanded={false}
+        panelExpanded={true}
         focus={state.gameState === CoopGameState.ShowTips && selectedPolygon
           ? selectedPolygon.id
           : "all"}

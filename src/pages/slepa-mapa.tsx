@@ -136,7 +136,7 @@ export default function BlindMap({ polygonData }: BlindMapProps) {
         }
         onClickFactory={polygonOnClickFactory}
         showPanel={true}
-        panelExpanded={state.gameState === GameState.ShowTips}
+        panelExpanded={![GameState.Started, GameState.Paused].includes(state.gameState)}
         panelTitle="Slepá mapa"
         focus={
           [GameState.NotStarted, GameState.Paused].includes(state.gameState)
