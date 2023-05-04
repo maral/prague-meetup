@@ -25,7 +25,7 @@ export function Selector() {
       title: "Slepá mapa",
       description:
         "Poznej co nejvíce městských části na slepé mapě. Z těch, které neuhodneš, ti jednu vybereme. Tu budeš mít za úkol navštívit.",
-      icon: <Map />,
+      icon: <Map size={44} className="mb-1" />,
     },
     {
       path: "/ruleta",
@@ -33,7 +33,7 @@ export function Selector() {
       title: "Ruleta",
       description:
         "Chceš objevovat Prahu, ale nerad se rozhoduješ? Zatoč si ruletou, ktrerá to rozsekne za tebe.",
-      icon: <Hypnotize />, //<Disc />
+      icon: <Hypnotize className="mb-1" />, //<Disc />
     },
   ];
 
@@ -58,7 +58,7 @@ export function Selector() {
                 className="group rounded-none border-0 bg-indigo-50 shadow-md shadow-indigo-500/50 transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50 md:rounded-lg"
               >
                 <div className="flex flex-col justify-between p-6">
-                  <div className="flex flex-row justify-between">
+                  <div className="flex flex-row justify-between items-end">
                     <div>
                       <p className="mb-1 text-lg font-semibold text-green-550">
                         {option.type}
@@ -67,7 +67,7 @@ export function Selector() {
                         {option.title}
                       </p>
                     </div>
-                    <div className="text-5xl text-indigo-700 pt-6 px-4">
+                    <div className="text-5xl text-indigo-700 pb-8 px-4">
                       {option.icon}
                     </div>
                   </div>
