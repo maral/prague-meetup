@@ -43,8 +43,8 @@ export default function MapLayout({
     ? "lg:w-[calc(100vh-40rem)"
     : "lg:w-[calc(100vh-36rem)";
   const panelWidth = panelExpanded ? "lg:w-[48rem]" : "lg:w-[36rem]";
-  const mapHeight = panelExpanded ? "h-[40vh]" : "h-[70vh]";
-  const panelHeight = panelExpanded ? "h-[70vh]" : "h-[40vh]";
+  const mapHeight = panelExpanded ? "h-[35%]" : "h-[65%]";
+  const panelHeight = panelExpanded ? "h-[65%]" : "h-[35%]";
 
   return (
     <main className="flex h-screen flex-col lg:flex-row">

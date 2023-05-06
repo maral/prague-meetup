@@ -38,7 +38,7 @@ export function Selector() {
   ];
 
   return (
-    <section className="mx-auto flex min-h-screen max-w-7xl px-8 font-primary">
+    <section className="mx-auto flex min-h-screen max-w-[80rem] px-8 font-primary">
       <div className="m-auto">
         <div className="mx-auto w-full text-left md:w-11/12 md:text-center xl:w-9/12">
           <h1 className="mb-5 mt-5 block pb-2 font-lead text-4xl font-extrabold text-indigo-700 md:text-6xl">
@@ -49,7 +49,7 @@ export function Selector() {
             mapy zatím nedovedly. Vyber si, jak je budeš objevovat.
           </p>
         </div>
-        <div className="mx-auto mb-10 w-full xl:w-4/5">
+        <div className="mx-auto mb-10 w-full">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-6">
             {options.map((option, index) => (
               <Link
@@ -58,16 +58,16 @@ export function Selector() {
                 className="group rounded-none border-0 bg-indigo-50 shadow-md shadow-indigo-500/50 transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50 md:rounded-lg"
               >
                 <div className="flex flex-col justify-between p-6">
-                  <div className="flex flex-row justify-between items-end">
-                    <div>
+                  <div className="flex flex-row justify-between items-end pb-8 min-h-min md:min-h-[9rem] xl:min-h-min">
+                    <div className=" ">
                       <p className="mb-1 text-lg font-semibold text-green-550">
                         {option.type}
                       </p>
-                      <p className="my-2 pb-6 font-primary text-4xl font-extrabold text-gray-800">
+                      <h2 className="mt-2 font-primary text-4xl font-extrabold text-gray-800">
                         {option.title}
-                      </p>
+                      </h2>
                     </div>
-                    <div className="text-5xl text-indigo-700 pb-8 px-4">
+                    <div className="text-5xl text-indigo-700 px-4">
                       {option.icon}
                     </div>
                   </div>
