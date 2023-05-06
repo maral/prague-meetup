@@ -16,7 +16,7 @@ export function Selector() {
       type: "Spolupráce",
       title: "Výběr s přáteli",
       description:
-        "Vyber všechny městské části, které už znáš. Pošli výsledek kamárádovi. Po vyplnění dostanete návrhy na nová zajímavá místa, kam můžete společně zajít.",
+        "Chceš se potkat s přáteli a zatím nevíš kde? Co zkusit nové místo v Praze? Označte společně místa, kde jste už byli a vybereme vám novou městskou část k objevení.",
       icon: <People /> //<EmojiSmile />,
     },
     {
@@ -55,7 +55,7 @@ export function Selector() {
               <Link
                 href={option.path}
                 key={index}
-                className="group rounded-none border-0 bg-indigo-50 shadow-md shadow-indigo-500/50 transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50 md:rounded-lg"
+                className="group rounded-md border-0 bg-indigo-50 shadow-md shadow-indigo-500/50 transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50 md:rounded-lg"
               >
                 <div className="flex flex-col justify-between p-6">
                   <div className="flex flex-row justify-between items-end pb-8 min-h-min md:min-h-[9rem] xl:min-h-min">
