@@ -114,10 +114,11 @@ export default function BlindMap({ polygonData, siteUrl }: BlindMapProps) {
       >
         {state.gameState === CoopGameState.Started && (
           <>
-            <PanelH2>Vyber všechny již navštívené městské části</PanelH2>
+            <PanelH2>Vyber městské části, které už znáš</PanelH2>
             <p className="mb-6 italic text-gray-500">
-              Již navštívené městské části jsou vyznačené červenou barvou. Z
-              ostatních můžeme vybrat místo k objevení.
+              Ty jsou vyznačené červenou barvou. Z ostatních městských částí
+              ti jednu vybereme. V dalším kroku můžeš svůj výběr poslat
+              přátelům k doplnění.
             </p>
             <PanelButton
               title="Mám hotovo"

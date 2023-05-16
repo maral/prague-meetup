@@ -16,6 +16,7 @@ import LinkButton from "../ui/LinkButton";
 import Pill from "../ui/Pill";
 import PanelH1 from "../ui/PanelH1";
 import SlideDown from "../ui/SlideDown";
+import ExternalLink from "../ui/ExternalLink";
 
 interface TipsProps {
   tips: AreaTips;
@@ -101,13 +102,11 @@ export default function Tips({ tips }: TipsProps) {
           <p>
             Bohužel pro tuto městskou část zatím nemáme žádné tipy. Pokud jsi
             dobrá duše a chceš pomoct, můžeš vložit chybějící tipy{" "}
-            <Link
+            <ExternalLink
               href="https://forms.gle/oPZUQg4vNBofSPpE7"
-              target="_blank"
-              className="text-blue-600 hover:underline"
             >
               přes tento formulář
-            </Link>
+            </ExternalLink>
             . Díky moc. <HeartFill className="inline text-sm text-red-600" />
           </p>
         </>
