@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
   HeartFill,
   Hypnotize,
+  LightbulbFill,
   Map,
   People,
   XLg,
@@ -31,7 +32,7 @@ export function Selector({ openAbout }: SelectorProps) {
       title: "Výběr s přáteli",
       description:
         "Chceš se potkat s přáteli a zatím nevíš kde? Co zkusit nové místo v Praze? Označte společně místa, kde jste už byli a vybereme vám novou městskou část k objevení.",
-      icon: <People />, //<EmojiSmile />,
+      icon: <People />,
     },
     {
       path: "/slepa-mapa",
@@ -46,8 +47,8 @@ export function Selector({ openAbout }: SelectorProps) {
       type: "Náhoda",
       title: "Ruleta",
       description:
-        "Chceš objevovat Prahu, ale nerad se rozhoduješ? Zatoč si ruletou, ktrerá to rozsekne za tebe.",
-      icon: <Hypnotize className="mb-1" />, //<Disc />
+        "Chceš objevovat Prahu, ale rozhodování tě bolí? Zatoč si ruletou, ktrerá to rozsekne za tebe.",
+      icon: <Hypnotize className="mb-1" />,
     },
   ];
 
@@ -57,10 +58,10 @@ export function Selector({ openAbout }: SelectorProps) {
         <section className="mx-auto flex min-h-screen max-w-[80rem] flex-col px-8 font-primary">
           <div className=" pt-4 text-right md:absolute md:right-8 md:top-8 md:pt-0 md:text-lg">
             <button
-              className="text-gray-500 hover:text-gray-700"
+              className="group text-gray-900 hover:text-gray-600"
               onClick={() => openAbout()}
             >
-              O aplikaci
+              <LightbulbFill className="relative transition-all text-yellow-500 inline top-[-2px] group-hover:scale-125" size={24} /> O aplikaci
             </button>
           </div>
 

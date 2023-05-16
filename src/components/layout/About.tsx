@@ -77,6 +77,10 @@ export function About({ close }: AboutProps) {
             <li>janarericha</li>
           </ul>
           <Paragraph>
+            Také děkuji své nejskvělejší manželce, která mi pomohla odladit
+            aplikaci a vylepšit grafiku a texty.
+          </Paragraph>
+          <Paragraph>
             Kdo by mi chtěl ještě přispět (stále je řada míst bez vyplněných
             všech 3 tipů), tak prosím{" "}
             <ExternalLink href="https://forms.gle/oPZUQg4vNBofSPpE7">
