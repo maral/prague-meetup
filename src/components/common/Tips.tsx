@@ -146,7 +146,7 @@ const getTipIcon = (type: TipType): JSX.Element => {
 
 function Tip({ tip, type }: TipProps) {
   return (
-    <div className="rounded-lg border border-gray-200 bg-white font-primary shadow-lg dark:border-gray-700 dark:bg-gray-800">
+    <div className="rounded-lg border border-gray-200 bg-white font-primary shadow-lg">
       <Image
         className="max-h-40 w-full rounded-t-lg object-cover"
         src={tip.imageUrl}
@@ -160,7 +160,7 @@ function Tip({ tip, type }: TipProps) {
           {getTipIcon(type)}
           {getTipTypeName(type)}
         </p>
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
           {tip.name}
         </h5>
         {tip.comment && (
