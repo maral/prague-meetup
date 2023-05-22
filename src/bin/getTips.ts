@@ -1,7 +1,7 @@
 import { updateAndStoreTips } from "../data/tips";
 
 async function run() {
-  const result = await updateAndStoreTips();
+  await updateAndStoreTips();
 }
 
 run().catch((error) =>
