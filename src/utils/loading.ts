@@ -26,6 +26,17 @@ const getPragueDistricts = (): JsonMetadata => {
   };
 };
 
+const getPragueCadastreUnits = (): JsonMetadata => {
+  return {
+    fileName: "ku.geojson",
+    propertiesMap: {
+      idKey: "KOD",
+      nameKey: "NAZEV",
+    },
+    sortFunctionType: SortFunctionType.PRAGUE_DISTRICTS,
+  };
+};
+
 const getPragueParksAndForests = (): JsonMetadata => {
   return {
     fileName: "parks-nature-forests.geojson",
