@@ -1,6 +1,4 @@
-import {
-  HeartFill, XLg
-} from "react-bootstrap-icons";
+import { HeartFill, XLg } from "react-bootstrap-icons";
 import ExternalLink from "../ui/ExternalLink";
 
 interface AboutProps {
@@ -22,12 +20,12 @@ export function About({ close }: AboutProps) {
         </h2>
         <div className="mb-16 text-lg">
           <Paragraph>
-            Milý uživateli, děkuji, že jsi zavítal na moji aplikaci a
-            doufám, že ti přinesla zábavu a užitek. Nápad na aplikaci jsem
-            dostal, když jsme se měli potkat s kamarádem a nechtělo se nám
-            chodit na místa, kde jsme už byli. Praha je obrovská a existuje tu
-            spoustu zajímavých míst, sídlišť, roztomilých vilových čtvrtí,
-            parků, kostelů, památek a to vše stojí za objevování.
+            Milý uživateli, děkuji, že jsi zavítal na moji aplikaci a doufám, že
+            ti přinesla zábavu a užitek. Nápad na aplikaci jsem dostal, když
+            jsme se měli potkat s kamarádem a nechtělo se nám chodit na místa,
+            kde jsme už byli. Praha je obrovská a existuje tu spoustu zajímavých
+            míst, sídlišť, roztomilých vilových čtvrtí, parků, kostelů, památek
+            a to vše stojí za objevování.
           </Paragraph>
           <Paragraph>
             Projekt vznikl během několika málo týdnů, kdy jsem si chtěl
@@ -35,30 +33,40 @@ export function About({ close }: AboutProps) {
             užitečného.
           </Paragraph>
 
-          <H3>
-            Kde najdu přehledně všechna místa najednou?
-          </H3>
+          <H3>Kde najdu přehledně všechna místa najednou?</H3>
 
           <Paragraph>
             Nechtěl jsem vytvořit další stránku typu{" "}
-            <em>50 nejkrásnějších míst v Praze</em>. Mojí ambicí není
-            vytvořit vyčerpávající výčet všech skvělých zajímavých míst,
-            které Praha skýtá. Objevuj Prahu tě má dostat z komfortní zóny,
-            přinést trochu náhody a spontánnosti a přenést tě na místo,
-            které by tě zkrátka jinak nenapadlo nebo nelákalo.
+            <em>50 nejkrásnějších míst v Praze</em>. Mojí ambicí není vytvořit
+            vyčerpávající výčet všech skvělých zajímavých míst, které Praha
+            skýtá. Objevuj Prahu tě má dostat z komfortní zóny, přinést trochu
+            náhody a spontánnosti a přenést tě na místo, které by tě zkrátka
+            jinak nenapadlo nebo nelákalo.
           </Paragraph>
 
           <Paragraph>
             Pokud se ti můj přístup nelíbí,{" "}
             <ExternalLink href="https://www.prague.eu/cs/deti">na</ExternalLink>{" "}
-            <ExternalLink href="https://ifenomen.cz/cestovani/9-nejtajemnejsich-mist-prahy">internetu</ExternalLink>{" "}
-            <ExternalLink href="https://www.kudyznudy.cz/aktuality/10-tipu-kam-jit-na-prochazku-v-praze">najdeš</ExternalLink>{" "}
-            <ExternalLink href="https://www.westwing.cz/inspiration/lifestyle/cestovani/20-nejlepsich-tipu-kam-na-vylet-v-praze/">spoustu</ExternalLink>{" "}
-            <ExternalLink href="https://www.seznamzpravy.cz/clanek/kam-v-praze-za-prirodou-109855">článků</ExternalLink>{" "}
-            <ExternalLink href="https://www.dianaella.com/2021/10/24/14-tipu-kam-v-praze-na-prochazku-do-prirody/">a</ExternalLink>{" "}
-            <ExternalLink href="https://www.slevomat.cz/magazin/2034-vylety-praha">seznamů</ExternalLink>,{" "}
-            které ti nabídnou spoustu zajímavých míst bez nutnosti se prokousat
-            slepou mapou nebo náhodným výběrem.
+            <ExternalLink href="https://ifenomen.cz/cestovani/9-nejtajemnejsich-mist-prahy">
+              internetu
+            </ExternalLink>{" "}
+            <ExternalLink href="https://www.kudyznudy.cz/aktuality/10-tipu-kam-jit-na-prochazku-v-praze">
+              najdeš
+            </ExternalLink>{" "}
+            <ExternalLink href="https://www.westwing.cz/inspiration/lifestyle/cestovani/20-nejlepsich-tipu-kam-na-vylet-v-praze/">
+              spoustu
+            </ExternalLink>{" "}
+            <ExternalLink href="https://www.seznamzpravy.cz/clanek/kam-v-praze-za-prirodou-109855">
+              článků
+            </ExternalLink>{" "}
+            <ExternalLink href="https://www.dianaella.com/2021/10/24/14-tipu-kam-v-praze-na-prochazku-do-prirody/">
+              a
+            </ExternalLink>{" "}
+            <ExternalLink href="https://www.slevomat.cz/magazin/2034-vylety-praha">
+              seznamů
+            </ExternalLink>
+            , které ti nabídnou řadu zajímavých míst bez nutnosti se
+            prokousat slepou mapou nebo náhodným výběrem.
           </Paragraph>
 
           <H3>
@@ -67,8 +75,8 @@ export function About({ close }: AboutProps) {
           </H3>
           <Paragraph>
             Děkuji všem, kteří mi pomohli a dodali tipy na zajímavá místa k
-            navštívení. Bylo vás mnoho, jmenovat můžu ty, kteří mi zanechali
-            své jméno:{" "}
+            navštívení. Bylo vás mnoho, jmenovat můžu ty, kteří mi zanechali své
+            jméno:{" "}
           </Paragraph>
           <ul className="mb-4 mt-2 list-disc pl-8">
             <li>Nalim </li>
@@ -89,51 +97,25 @@ export function About({ close }: AboutProps) {
             , díky!
           </Paragraph>
 
-          <H3>
-            Použité technologie
-          </H3>
+          <H3>Použité technologie</H3>
           <Paragraph>
             Aplikace je postavená na Reactu, Next.js a Tailwind CSS. Data o
-            městských částech se načítají automaticky z Google tabulky, do
-            které jsme společně posbírali tipy na zajímavá místa. Obrázky a
-            doprovodné texty k jednotlivým městským částem jsou převzaty z
-            Mapy.cz (tímto žádám o prominutí a prosím, nežalujte mě 😨😁).
-            Zdrojové kódy jsou k dispozici na{" "}
-            <ExternalLink href="https://github.com/maral/Paragraphrague-meetup">
+            městských částech se načítají automaticky z Google tabulky, do které
+            jsme společně posbírali tipy na zajímavá místa. Obrázky a doprovodné
+            texty k jednotlivým městským částem jsou převzaty z Mapy.cz (tímto
+            žádám o prominutí a prosím, nežalujte mě 😨😁). Zdrojové kódy jsou k
+            dispozici na{" "}
+            <ExternalLink href="https://github.com/maral/prague-meetup">
               Githubu
             </ExternalLink>
           </Paragraph>
 
-          <H3>
-            Chcete mě? 🐶🐕
-          </H3>
           <Paragraph>
-            Po několika letech ve školství se opět vracím do IT. Pokud
-            hledáte do party někoho na remote (protože v září se přesouvám
-            na 2 roky do Itálie), ozvěte se mi. Mám rád velké výzvy, řešení
-            náročných problémů, rád se učím a hraju si s novými
-            technologiemi jak na frontendu, tak na backendu.
-          </Paragraph>
-          <Paragraph>
-            Spoluzaložil jsem aplikaci{" "}
-            <ExternalLink href="https://www.vcelka.cz">Včelka</ExternalLink>
-            . V posledním roce jsem pomohl převést{" "}
-            <ExternalLink href="https://www.spadovostpraha.cz">
-              spádové oblasti pražských základních škol z PDF na mapu
-            </ExternalLink>
-            , hrál jsem si s{" "}
-            <ExternalLink href="https://mareklisy.cz/gen-art/">
-              generativním uměním
-            </ExternalLink>
-            . Aktuálně se učím smysluplně využívat v aplikacích GPT a
-            pracuji na digitalizaci spádových oblastí pro celou ČR.
-          </Paragraph>
-          <Paragraph>
-            Více na mém{" "}
+            Najdeš mě na{" "}
             <ExternalLink href="https://www.linkedin.com/in/mareklisy/">
               LinkendInu
-            </ExternalLink>
-            , najdete mě taky na{" "}
+            </ExternalLink>{" "}
+            nebo{" "}
             <ExternalLink href="https://twitter.com/LisyMarek">
               Twitteru
             </ExternalLink>
@@ -141,7 +123,8 @@ export function About({ close }: AboutProps) {
           </Paragraph>
 
           <p className="mt-8">
-            Děkuji za návštěvu a někdy se zase zastav!<br />
+            Děkuji za návštěvu a někdy se zase zastav!
+            <br />
             Marek Lisý
           </p>
         </div>
@@ -150,7 +133,7 @@ export function About({ close }: AboutProps) {
   );
 }
 
-function H3 ({ children }: { children: React.ReactNode }) {
+function H3({ children }: { children: React.ReactNode }) {
   return (
     <h3 className="mb-4 mt-12 font-lead text-2xl text-indigo-700">
       {children}
@@ -158,6 +141,6 @@ function H3 ({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Paragraph ({ children }: { children: React.ReactNode }) {
+function Paragraph({ children }: { children: React.ReactNode }) {
   return <p className="mb-4">{children}</p>;
 }
