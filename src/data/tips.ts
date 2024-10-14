@@ -71,12 +71,10 @@ async function getTipsSource(): Promise<AreaTipsSource[]> {
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 
-  const client = await googleAuth.getClient();
-
-  const googleSheets = new sheets_v4.Sheets({ auth: client });
+  const googleSheets = new sheets_v4.Sheets({ auth: googleAuth });
 
   const val = await googleSheets.spreadsheets.values.get({
-    auth: client,
+    auth: googleAuth,
     spreadsheetId: "14BHQgaoyDDmz9vDWXsIdEAO1clW0tnSg7boMkkrH51A",
     range: "A1:M",
   });
