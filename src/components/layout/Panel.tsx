@@ -22,8 +22,8 @@ export default function Panel({ title, divRef, children }: PanelProps) {
       </div>
       <div
         ref={divRef}
-        className="scrollbar-thumb-radius h-[calc(100%-4rem)] w-full overflow-y-auto py-6 pl-6 pr-[calc(1.5rem-8px)] font-primary scrollbar-thin scrollbar-thumb-indigo-700 lg:h-[calc(100vh-6rem)]"
-        style={{ scrollbarGutter: "stable" }}
+        className="h-[calc(100%-4rem)] w-full overflow-y-auto py-6 pl-6 pr-[calc(1.5rem-8px)] font-primary lg:h-[calc(100vh-6rem)]"
+        style={{ scrollbarGutter: "stable", scrollbarWidth: "thin", scrollbarColor: "#4338ca #f1f1f1" }}
       >
         {children}
       </div>
