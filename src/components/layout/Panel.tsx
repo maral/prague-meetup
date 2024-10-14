@@ -22,7 +22,7 @@ export default function Panel({ title, divRef, children }: PanelProps) {
       </div>
       <div
         ref={divRef}
-        className="scrollbar-thumb-radius h-[calc(100%-4rem)] w-full overflow-y-auto py-6 pl-6 pr-[calc(1.5rem-8px)] font-primary scrollbar-thin scrollbar-thumb-indigo-200 lg:h-[calc(100vh-6rem)]"
+        className="scrollbar-thumb-radius h-[calc(100%-4rem)] w-full overflow-y-auto py-6 pl-6 pr-[calc(1.5rem-8px)] font-primary scrollbar-thin scrollbar-thumb-indigo-700 lg:h-[calc(100vh-6rem)]"
         style={{ scrollbarGutter: "stable" }}
       >
         {children}
